@@ -1,0 +1,5 @@
+name: SlimeRancher
+version: 0.0.1-beta
+main: me.colton.slimerancher.SlimeRancher
+api-version: 1.18
+author: TheCodingGoose
