@@ -1,15 +1,21 @@
 package me.colton.slimerancher;
 
+import me.colton.slimerancher.Entities.CreatureManager;
 import me.colton.slimerancher.Events.PlayerJoin;
+import me.colton.slimerancher.Spawners.SpawnerManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SlimeRancher extends JavaPlugin {
 
     public static SlimeRancher instance;
+    public static CreatureManager creatureManager;
+    public static SpawnerManager spawnerManager;
 
     @Override
     public void onEnable() {
         instance = this;
+        creatureManager = new CreatureManager(2500, 25);
+        spawnerManager = new SpawnerManager();
 
         registerEvents();
         registerCommands();
