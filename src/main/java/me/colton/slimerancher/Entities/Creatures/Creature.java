@@ -9,23 +9,32 @@ import java.util.UUID;
 public interface Creature {
 
     /**
-     * tick the creature
+     * Ticks the creature
      */
     void tick();
 
     /**
-     * get the entity attached to the creature
+     * Gets the entity attached to the creature
+     * @return      the entity
      */
     Entity getEntity();
 
     /**
-     * get the UUID of the owner of the creature
+     * Gets the UUID of the owner of the creature
+     * @return      the owner's uuid
      */
     UUID getOwner();
 
     /**
-     * get the current location of the creature
+     * Gets the current location of the creature
+     * @return      the current location
      */
     Location getLocation();
+
+    /**
+     * Is the creature alive?
+     * @return      if the creature is alive
+     */
+    Boolean isAlive();
 
 }
