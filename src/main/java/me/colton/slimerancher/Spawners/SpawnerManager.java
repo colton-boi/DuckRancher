@@ -1,6 +1,5 @@
 package me.colton.slimerancher.Spawners;
 
-import me.colton.slimerancher.Entities.Creatures.Creature;
 import me.colton.slimerancher.Enums.SpawnerType;
 import org.bukkit.Bukkit;
 
@@ -17,8 +16,7 @@ public class SpawnerManager {
     }
 
     public List<Spawner> getSpawners(UUID player) {
-        spawners.computeIfAbsent(player, k -> new ArrayList<>());
-        return spawners.get(player);
+        return spawners.computeIfAbsent(player, k -> new ArrayList<>());
     }
 
     private List<Spawner> getSpawners(UUID player, SpawnerType type, boolean isType) {
@@ -27,12 +25,8 @@ public class SpawnerManager {
                 .toList();
     }
 
-    /**
-     * tick the nearest slime spawner belonging to the player
-     * @param player    the player's uuid
-     */
-    public void tickNearestSlimeSpawner(UUID player) {
-        List<Spawner> slimeSpawners = getSpawners(player, SpawnerType.Slime, true);
+    private Spawner getClosest(UUID player, SpawnerType type, boolean isType) {
+        List<Spawner> slimeSpawners = getSpawners(player, type, isType);
         double shortestDist = Double.MAX_VALUE;
         Spawner closest = null;
         for (Spawner spawner : slimeSpawners) {
@@ -41,7 +35,15 @@ public class SpawnerManager {
                 closest = spawner;
             }
         }
-        closest.tick();
+        return closest;
+    }
+
+    /**
+     * tick the nearest slime spawner belonging to the player
+     * @param player    the player's uuid
+     */
+    public void tickNearestSlimeSpawner(UUID player) {
+        getClosest(player, SpawnerType.Slime, true).tick();
     }
 
     /**
@@ -49,6 +51,6 @@ public class SpawnerManager {
      * @param player    the player's uuid
      */
     public void tickNearestCreatureSpawner(UUID player) {
-        List<Spawner> nonSlimeSpawners = getSpawners(player, SpawnerType.Slime, false);
+        getClosest(player, SpawnerType.Slime, false).tick();
     }
 }
