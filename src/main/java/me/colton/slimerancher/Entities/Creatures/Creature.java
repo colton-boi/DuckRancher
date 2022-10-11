@@ -35,6 +35,6 @@ public interface Creature {
      * Is the creature alive?
      * @return      if the creature is alive
      */
-    Boolean isAlive();
+    boolean isAlive();
 
 }

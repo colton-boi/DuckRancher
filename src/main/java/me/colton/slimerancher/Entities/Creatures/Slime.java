@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class Slime implements Creature {
 
-    public Location location;
+    private Location location;
     private final SlimeType mainType;
     private SlimeType secondaryType;
     private final UUID owner;
@@ -27,18 +27,30 @@ public class Slime implements Creature {
         this.entity.getEquipment().setHelmet(mainType.getHeadItem());
     }
 
+    @Override
     public void tick() {
 
-        if (entity.isOnGround()) {
-            if (Math.random() > 0.99) {
-                // Make the slime jump up and in a random direction every ~100 ticks (5 seconds)
-                entity.setVelocity(entity.getVelocity().add(new Vector((Math.random()-0.5), (Math.random()*0.25)+0.5, (Math.random()-0.5)*2)));
+        // Every ~100 ticks (5 seconds) while on the ground, jump
+        if (Math.random() > 0.99) {
+            if (entity.isOnGround()) {
+                jump();
             }
         }
 
         entity.getLocation().setDirection(entity.getVelocity()); // Face the entity where it is heading
         location = entity.getLocation();
 
+    }
+
+    /**
+     * Make the slime jump up and in a random direction
+     */
+    public void jump() {
+        entity.setVelocity(entity.getVelocity().add(new Vector((Math.random()-0.5), (Math.random()*0.25)+0.5, (Math.random()-0.5)*2)));
+    }
+
+    public boolean isAlive() {
+        return !entity.isDead();
     }
 
     @Override
