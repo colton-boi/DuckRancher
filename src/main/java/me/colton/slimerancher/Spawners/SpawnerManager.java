@@ -10,6 +10,12 @@ import java.util.UUID;
 
 public class SpawnerManager {
     private final HashMap<UUID, List<Spawner>> spawners = new HashMap<>();
+    public final double maxCreaturesPerSpawner;
+
+    public SpawnerManager(double maxCreaturesPerSpawner) {
+        this.maxCreaturesPerSpawner = maxCreaturesPerSpawner;
+    }
+
 
     public List<Spawner> getSpawners() {
         return spawners.values().stream().flatMap(List::stream).toList();
@@ -30,7 +36,7 @@ public class SpawnerManager {
         double shortestDist = Double.MAX_VALUE;
         Spawner closest = null;
         for (Spawner spawner : slimeSpawners) {
-            if ((Bukkit.getPlayer(player).getLocation().distance(spawner.getLocation())) < shortestDist) {
+            if ((Bukkit.getPlayer(player).getLocation().distance(spawner.getLocation())) < shortestDist && spawner.canSpawn()) {
                 shortestDist = (Bukkit.getPlayer(player).getLocation().distance(spawner.getLocation()));
                 closest = spawner;
             }

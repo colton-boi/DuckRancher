@@ -22,6 +22,12 @@ public interface Spawner {
     void spawnCreature();
 
     /**
+     * Set if this spawner is active
+     * @param active  whether the spawner can spawn mobs
+     */
+    void setActive(boolean active);
+
+    /**
      * Check if a creature can be spawned by this spawner
      * @return      a creature can spawn
      */

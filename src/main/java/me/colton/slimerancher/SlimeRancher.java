@@ -15,7 +15,7 @@ public class SlimeRancher extends JavaPlugin {
     public void onEnable() {
         instance = this;
         creatureManager = new CreatureManager(2500, 25);
-        spawnerManager = new SpawnerManager();
+        spawnerManager = new SpawnerManager(5);
 
         registerEvents();
         registerCommands();
