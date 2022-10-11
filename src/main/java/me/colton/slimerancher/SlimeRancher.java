@@ -1,6 +1,6 @@
 package me.colton.slimerancher;
 
-import me.colton.slimerancher.Entities.CreatureManager;
+import me.colton.slimerancher.Entities.Creatures.CreatureManager;
 import me.colton.slimerancher.Events.PlayerJoin;
 import me.colton.slimerancher.Spawners.SpawnerManager;
 import org.bukkit.plugin.java.JavaPlugin;

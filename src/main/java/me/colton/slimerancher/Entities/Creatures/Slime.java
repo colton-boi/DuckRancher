@@ -1,12 +1,10 @@
-package me.colton.slimerancher.Entities;
+package me.colton.slimerancher.Entities.Creatures;
 
-import me.colton.slimerancher.Entities.Enums.SlimeType;
+import me.colton.slimerancher.Enums.SlimeType;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 import java.util.UUID;
@@ -26,12 +24,9 @@ public class Slime implements Creature {
 
         this.entity.setSmall(true);
         this.entity.setVisible(false);
-        this.entity.getEquipment().setHelmet(new ItemStack(Material.SLIME_BLOCK));
+        this.entity.getEquipment().setHelmet(mainType.getHeadItem());
     }
 
-    /**
-     * the ticker for slime entity
-     */
     public void tick() {
 
         if (entity.isOnGround()) {

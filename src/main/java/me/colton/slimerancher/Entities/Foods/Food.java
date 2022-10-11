@@ -1,17 +1,11 @@
-package me.colton.slimerancher.Entities;
-
+package me.colton.slimerancher.Entities.Foods;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 
 import java.util.UUID;
 
-public interface Creature {
-
-    /**
-     * tick the creature
-     */
-    void tick();
+public interface Food {
 
     /**
      * get the entity attached to the creature

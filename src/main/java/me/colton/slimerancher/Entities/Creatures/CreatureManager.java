@@ -1,7 +1,9 @@
-package me.colton.slimerancher.Entities;
+package me.colton.slimerancher.Entities.Creatures;
 
-import me.colton.slimerancher.Entities.Enums.SlimeType;
+import me.colton.slimerancher.Enums.Type;
+import me.colton.slimerancher.Enums.SlimeType;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -50,6 +52,15 @@ public class CreatureManager {
         creatures.remove(player);
     }
 
+    public void spawnCreature(UUID player, Type type, Location location) {
+        switch (type.getClass().toString()) {
+            case "SlimeType":
+                creatures.get(player).add(new Slime(location, (SlimeType) type, player));
+            case "LivestockType":
+                //creatures.get(player).add(new Livestock(location, (LivestockType) type, player));
+        }
+    }
+
 
     public int creatureManagerTask = getScheduler().scheduleSyncRepeatingTask(instance, () -> {
 
@@ -64,11 +75,11 @@ public class CreatureManager {
                 if (creatures.get(p.getUniqueId()) == null || creatures.get(p.getUniqueId()).size() < maximumCreaturesPerPlayer) {
                     if (Math.random()>0.95) {
                         //creatures.get(p.getUniqueId()).add(new Slime(p.getLocation(), SlimeType.PINK, p.getUniqueId()));
-                        spawnerManager.tickNearestSlimeSpawner(p);
+                        spawnerManager.tickNearestSlimeSpawner(p.getUniqueId());
                     }
                     if (Math.random()>0.995) {
                         //getClosestChickenSpawn(player);
-                        spawnerManager.tickNearestCreatureSpawner(p);
+                        spawnerManager.tickNearestCreatureSpawner(p.getUniqueId());
                     }
                 }
             }
