@@ -64,7 +64,7 @@ public class CreatureManager {
     }
 
     public Slime spawnCreature(UUID player, Location location, SlimeType type) {
-        Slime spawned = new Slime(location, type, player);
+        Slime spawned = type.getSlimeFromType(location, player);
         creatures.get(player).add(spawned);
         return spawned;
     }
@@ -85,13 +85,8 @@ public class CreatureManager {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (creatures.size() < maximumCreatures) {
                 if (creatures.get(p.getUniqueId()) == null || creatures.get(p.getUniqueId()).size() < maximumCreaturesPerPlayer) {
-                    if (Math.random()>0.95) {
-                        spawnerManager.tickNearestSlimeSpawner(p.getUniqueId());
-                    }
-                    if (Math.random()>0.995) {
-                        //getClosestChickenSpawn(player);
-                        spawnerManager.tickNearestCreatureSpawner(p.getUniqueId());
-                    }
+                    spawnerManager.tickNearestSlimeSpawner(p.getUniqueId());
+                    //spawnerManager.tickNearestCreatureSpawner(p.getUniqueId());
                 }
             }
         }
