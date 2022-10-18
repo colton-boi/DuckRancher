@@ -49,7 +49,10 @@ public class SpawnerManager {
      * @param player    the player's uuid
      */
     public void tickNearestSlimeSpawner(UUID player) {
-        getClosest(player, SpawnerType.Slime, true).tick();
+        Spawner spawner = getClosest(player, SpawnerType.Slime, true);
+        if (spawner != null) {
+            spawner.tick();
+        }
     }
 
     /**
