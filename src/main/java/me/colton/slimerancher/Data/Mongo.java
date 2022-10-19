@@ -7,6 +7,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 
+import static me.colton.slimerancher.SlimeRancher.instance;
 import static org.bukkit.Bukkit.getLogger;
 
 public class Mongo {
@@ -22,7 +23,7 @@ public class Mongo {
         }
 
         try {
-            ConnectionString connectionString = new ConnectionString("mongodb+srv://dbUser:dbPassword@cluster0.jzrze.mongodb.net/?retryWrites=true&w=majority");
+            ConnectionString connectionString = new ConnectionString(instance.getConfig().getString("MongoDB"));
             MongoClientSettings settings = MongoClientSettings.builder()
                     .applyConnectionString(connectionString)
                     .build();

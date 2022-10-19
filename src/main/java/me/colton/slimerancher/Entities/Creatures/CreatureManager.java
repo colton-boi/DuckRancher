@@ -1,6 +1,5 @@
 package me.colton.slimerancher.Entities.Creatures;
 
-import me.colton.slimerancher.Enums.Type;
 import me.colton.slimerancher.Enums.SlimeType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -36,7 +35,7 @@ public class CreatureManager {
 
     /**
      * Remove a single creature from the list of creatures associated with the player
-     * @param player    the player the creature belongs to
+     * @param player    the UUID of the player
      * @param entity    the creature to remove
      */
     public void removeCreature(UUID player, Creature entity) {
@@ -44,23 +43,36 @@ public class CreatureManager {
     }
 
     /**
+     * Remove several creatures from the list of creatures associated with the player
+     * @param player    the UUID of the player
+     */
+    public void removeCreatures(UUID player, List<Creature> removed) {
+        this.creatures.get(player).removeAll(removed);
+    }
+
+    /**
      * Clears the list of creatures for a player
      * @param player    the player to clear
      * @param remove    whether to remove the player from the hashmap
      */
-    public void removeCreatures(UUID player, Boolean remove) {
-        creatures.remove(player);
-    }
-
-    public void spawnCreature(UUID player, Type type, Location location) {
-        switch (type.getClass().toString()) {
-            case "SlimeType":
-                creatures.get(player).add(new Slime(location, (SlimeType) type, player));
-            case "LivestockType":
-                //creatures.get(player).add(new Livestock(location, (LivestockType) type, player));
+    public void removeCreatures(UUID player, boolean remove) {
+        if (remove) {
+            creatures.remove(player);
+        } else {
+            creatures.get(player).clear();
         }
     }
 
+    public Slime spawnCreature(UUID player, Location location, SlimeType type) {
+        Slime spawned = type.getSlimeFromType(location, player);
+        creatures.get(player).add(spawned);
+        return spawned;
+    }
+    /*
+    public Livestock spawnCreature(UUID player, Location location, LivestockType type) {
+        creatures.get(player).add(new Livestock(location, (LivestockType) type, player));
+    }
+    */
 
     public int creatureManagerTask = getScheduler().scheduleSyncRepeatingTask(instance, () -> {
 
@@ -73,14 +85,8 @@ public class CreatureManager {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (creatures.size() < maximumCreatures) {
                 if (creatures.get(p.getUniqueId()) == null || creatures.get(p.getUniqueId()).size() < maximumCreaturesPerPlayer) {
-                    if (Math.random()>0.95) {
-                        //creatures.get(p.getUniqueId()).add(new Slime(p.getLocation(), SlimeType.PINK, p.getUniqueId()));
-                        spawnerManager.tickNearestSlimeSpawner(p.getUniqueId());
-                    }
-                    if (Math.random()>0.995) {
-                        //getClosestChickenSpawn(player);
-                        spawnerManager.tickNearestCreatureSpawner(p.getUniqueId());
-                    }
+                    spawnerManager.tickNearestSlimeSpawner(p.getUniqueId());
+                    //spawnerManager.tickNearestCreatureSpawner(p.getUniqueId());
                 }
             }
         }

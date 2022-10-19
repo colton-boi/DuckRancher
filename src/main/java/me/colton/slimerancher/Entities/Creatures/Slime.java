@@ -4,41 +4,70 @@ import me.colton.slimerancher.Enums.SlimeType;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
+import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
-public class Slime implements Creature {
+public abstract class Slime implements Creature {
 
-    public Location location;
-    private final SlimeType mainType;
+    private SlimeType mainType;
     private SlimeType secondaryType;
-    private final UUID owner;
-    private final ArmorStand entity;
+    private UUID owner;
+    private ArmorStand entity;
+    private Random random = new Random();
 
-    public Slime(Location location, SlimeType mainType, UUID owner) {
+    public Slime init(Location location, SlimeType mainType, UUID owner) {
         this.mainType = mainType;
         this.owner = owner;
-        this.entity = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+        this.entity = location.getWorld().spawn(location, ArmorStand.class, (stand) -> {
+            stand.setSmall(true);
+            stand.setVisible(false);
+            stand.getEquipment().setHelmet(mainType.getHeadItem());
+        });
 
-        this.entity.setSmall(true);
-        this.entity.setVisible(false);
-        this.entity.getEquipment().setHelmet(mainType.getHeadItem());
+        return this;
+
     }
 
+    @Override
     public void tick() {
 
-        if (entity.isOnGround()) {
-            if (Math.random() > 0.99) {
-                // Make the slime jump up and in a random direction every ~100 ticks (5 seconds)
-                entity.setVelocity(entity.getVelocity().add(new Vector((Math.random()-0.5), (Math.random()*0.25)+0.5, (Math.random()-0.5)*2)));
+        // Every ~100 ticks (5 seconds) while on the ground, jump
+        if (random.nextDouble() > 0.99) {
+            if (entity.isOnGround()) {
+                jump();
             }
         }
 
-        entity.getLocation().setDirection(entity.getVelocity()); // Face the entity where it is heading
-        location = entity.getLocation();
+        customTick();
 
+    }
+
+    public abstract void customTick();
+
+    public abstract void customParticle();
+
+    /**
+     * Make the slime jump up and in a random direction
+     */
+    public void jump() {
+        entity.setVelocity(entity.getVelocity().add(new Vector((random.nextDouble()-0.5), (random.nextDouble()*0.5)+0.5, (random.nextDouble()-0.5))));
+        customParticle();
+        updateDirection();
+    }
+    public void updateDirection() {
+        Vector direction = entity.getVelocity().clone().normalize();
+        // Thanks CocoRaid: https://www.spigotmc.org/threads/how-to-get-yaw-pitch-and-roll-from-a-vector.368669/
+        double yaw = Math.atan2(direction.getZ(), direction.getX());
+        entity.setHeadPose(new EulerAngle(0, yaw + Math.toRadians(90), 0));
+    }
+
+    public boolean isAlive() {
+        return !entity.isDead();
     }
 
     @Override
@@ -53,6 +82,6 @@ public class Slime implements Creature {
 
     @Override
     public Location getLocation() {
-        return location;
+        return entity.getLocation();
     }
 }
