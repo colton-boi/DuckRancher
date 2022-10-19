@@ -19,6 +19,7 @@ public class SlimeRancher extends JavaPlugin {
 
         registerEvents();
         registerCommands();
+        saveDefaultConfig();
 
         getLogger().info("Slime Rancher version " + getVersion() + " is enabled!");
     }
