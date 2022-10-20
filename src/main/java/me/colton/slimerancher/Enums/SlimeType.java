@@ -2,10 +2,7 @@ package me.colton.slimerancher.Enums;
 
 import me.colton.slimerancher.Entities.Creatures.Creature;
 import me.colton.slimerancher.Entities.Creatures.Slime;
-import me.colton.slimerancher.Entities.Creatures.Slimes.PhosphorSlime;
-import me.colton.slimerancher.Entities.Creatures.Slimes.PinkSlime;
-import me.colton.slimerancher.Entities.Creatures.Slimes.RockSlime;
-import me.colton.slimerancher.Entities.Creatures.Slimes.TabbySlime;
+import me.colton.slimerancher.Entities.Creatures.Slimes.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -20,8 +17,8 @@ public enum SlimeType implements Type {
     ROCK(2, RockSlime.class),
     TABBY(3, TabbySlime.class),
     PHOSPHOR(4, PhosphorSlime.class),
-    /*BOOM(5),
-    CRYSTAL(6),
+    BOOM(5, BoomSlime.class),
+    /*CRYSTAL(6),
     HUNTER(7),
     HONEY(8),
     PUDDLE(9),

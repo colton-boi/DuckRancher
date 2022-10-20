@@ -22,4 +22,9 @@ public class PinkSlime extends Slime implements Creature {
         getLocation().getWorld().spawnParticle(Particle.REDSTONE, getLocation(), 15, 0.5, 0.5, 0.5,
                 0.025, new Particle.DustOptions(Color.fromRGB(255, 74, 214), 1.5F));
     }
+
+    @Override
+    public void customAnger() {
+
+    }
 }

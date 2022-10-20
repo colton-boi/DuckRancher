@@ -12,4 +12,9 @@ public class TabbySlime extends Slime {
     public void customParticle() {
 
     }
+
+    @Override
+    public void customAnger() {
+
+    }
 }

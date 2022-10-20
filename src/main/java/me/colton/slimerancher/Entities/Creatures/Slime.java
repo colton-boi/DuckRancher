@@ -18,7 +18,7 @@ public abstract class Slime implements Creature {
     private SlimeType secondaryType;
     private UUID owner;
     private ArmorStand entity;
-    private Random random = new Random();
+    public final Random random = new Random();
 
     public Slime init(Location location, SlimeType mainType, UUID owner) {
         this.mainType = mainType;
@@ -50,6 +50,8 @@ public abstract class Slime implements Creature {
     public abstract void customTick();
 
     public abstract void customParticle();
+
+    public abstract void customAnger();
 
     /**
      * Make the slime jump up and in a random direction
