@@ -14,7 +14,7 @@ public class PhosphorSlime extends Slime {
     }
 
     @Override
-    public void customAnger() {
+    public void customAnger(boolean skipCooldown) {
 
     }
 }

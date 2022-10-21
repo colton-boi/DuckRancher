@@ -7,8 +7,8 @@ public class BoomSlime extends Slime {
     @Override
     public void customTick() {
         if (getEntity().getNearbyEntities(2.5, 2.5, 2.5).stream().anyMatch(e -> e instanceof Player)) {
-            if (random.nextDouble() > 0.95) {
-                customAnger();
+            if (random.nextDouble() > 0.99) {
+                customAnger(false);
             }
         }
     }
@@ -19,7 +19,14 @@ public class BoomSlime extends Slime {
     }
 
     @Override
-    public void customAnger() {
+    public void customAnger(boolean skipCooldown) {
+        if (lastAnger+10000 < System.currentTimeMillis() || skipCooldown) {
+            lastAnger = System.currentTimeMillis();
+            explode();
+        }
+    }
+
+    public void explode() {
 
     }
 }

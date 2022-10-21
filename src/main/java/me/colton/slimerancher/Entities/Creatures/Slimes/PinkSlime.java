@@ -1,11 +1,10 @@
 package me.colton.slimerancher.Entities.Creatures.Slimes;
 
-import me.colton.slimerancher.Entities.Creatures.Creature;
 import me.colton.slimerancher.Entities.Creatures.Slime;
 import org.bukkit.Color;
 import org.bukkit.Particle;
 
-public class PinkSlime extends Slime implements Creature {
+public class PinkSlime extends Slime {
     private boolean lastOnGround = true;
 
     @Override
@@ -24,7 +23,7 @@ public class PinkSlime extends Slime implements Creature {
     }
 
     @Override
-    public void customAnger() {
+    public void customAnger(boolean skipCooldown) {
 
     }
 }

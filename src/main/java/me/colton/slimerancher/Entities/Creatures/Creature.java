@@ -14,6 +14,12 @@ public interface Creature {
     void tick();
 
     /**
+     * Check if the entity attached to this creature is alive
+     * @return      if the entity is living
+     */
+    boolean isAlive();
+
+    /**
      * Gets the entity attached to the creature
      * @return      the entity
      */
@@ -30,11 +36,4 @@ public interface Creature {
      * @return      the current location
      */
     Location getLocation();
-
-    /**
-     * Is the creature alive?
-     * @return      if the creature is alive
-     */
-    boolean isAlive();
-
 }
