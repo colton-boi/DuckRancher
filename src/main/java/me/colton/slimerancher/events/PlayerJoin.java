@@ -1,8 +1,8 @@
-package me.colton.slimerancher.Events;
+package me.colton.slimerancher.events;
 
-import me.colton.slimerancher.Enums.SlimeType;
-import me.colton.slimerancher.Items.VacPack;
-import me.colton.slimerancher.Spawners.SlimeSpawner;
+import me.colton.slimerancher.enums.SlimeType;
+import me.colton.slimerancher.items.VacPack;
+import me.colton.slimerancher.spawners.SlimeSpawner;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

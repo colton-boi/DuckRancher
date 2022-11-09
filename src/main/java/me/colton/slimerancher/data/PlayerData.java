@@ -1,4 +1,4 @@
-package me.colton.slimerancher.Data;
+package me.colton.slimerancher.data;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
-import static me.colton.slimerancher.Data.Mongo.getDatabase;
+import static me.colton.slimerancher.data.Mongo.getDatabase;
 
 public class PlayerData {
 

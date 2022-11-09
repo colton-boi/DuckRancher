@@ -1,4 +1,4 @@
-package me.colton.slimerancher.Entities.Foods;
+package me.colton.slimerancher.entities.foods;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

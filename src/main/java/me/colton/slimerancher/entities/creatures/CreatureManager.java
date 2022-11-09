@@ -1,6 +1,6 @@
-package me.colton.slimerancher.Entities.Creatures;
+package me.colton.slimerancher.entities.creatures;
 
-import me.colton.slimerancher.Enums.SlimeType;
+import me.colton.slimerancher.enums.SlimeType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

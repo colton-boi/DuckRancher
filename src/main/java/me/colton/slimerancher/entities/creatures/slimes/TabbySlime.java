@@ -1,8 +1,8 @@
-package me.colton.slimerancher.Entities.Creatures.Slimes;
+package me.colton.slimerancher.entities.creatures.slimes;
 
-import me.colton.slimerancher.Entities.Creatures.Slime;
+import me.colton.slimerancher.entities.creatures.Slime;
 
-public class PhosphorSlime extends Slime {
+public class TabbySlime extends Slime {
     @Override
     public void customTick() {
 

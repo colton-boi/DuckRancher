@@ -1,9 +1,9 @@
-package me.colton.slimerancher.Spawners;
+package me.colton.slimerancher.spawners;
 
-import me.colton.slimerancher.Entities.Creatures.Creature;
-import me.colton.slimerancher.Entities.Creatures.Slime;
-import me.colton.slimerancher.Enums.SlimeType;
-import me.colton.slimerancher.Enums.SpawnerType;
+import me.colton.slimerancher.entities.creatures.Creature;
+import me.colton.slimerancher.entities.creatures.Slime;
+import me.colton.slimerancher.enums.SlimeType;
+import me.colton.slimerancher.enums.SpawnerType;
 import org.bukkit.Location;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package me.colton.slimerancher.Enums;
+package me.colton.slimerancher.enums;
 
 public enum SpawnerType {
     Slime,

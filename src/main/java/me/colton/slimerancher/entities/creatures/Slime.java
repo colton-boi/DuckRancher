@@ -1,10 +1,9 @@
-package me.colton.slimerancher.Entities.Creatures;
+package me.colton.slimerancher.entities.creatures;
 
-import me.colton.slimerancher.Enums.SlimeType;
+import me.colton.slimerancher.enums.SlimeType;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
-import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
@@ -75,20 +74,12 @@ public abstract class Slime implements Creature {
      * Make the slime jump up and in a random direction
      */
     public void jump() {
-        entity.setVelocity(entity.getVelocity().add(new Vector((random.nextDouble()-0.5), (random.nextDouble()*0.5)+0.5, (random.nextDouble()-0.5))));
+        Vector velocity = entity.getVelocity().add(new Vector((random.nextDouble()-0.5), (random.nextDouble()*0.5)+0.5, (random.nextDouble()-0.5)));
+        entity.teleport(getLocation().setDirection(velocity));
+        entity.setVelocity(velocity);
         customParticle();
-        updateDirection();
     }
 
-    /**
-     * Make the slime face the direction it is moving in
-     */
-    public void updateDirection() {
-        Vector direction = entity.getVelocity().clone().normalize();
-        // Thanks CocoRaid: https://www.spigotmc.org/threads/how-to-get-yaw-pitch-and-roll-from-a-vector.368669/
-        double yaw = Math.atan2(direction.getZ(), direction.getX());
-        entity.setHeadPose(new EulerAngle(0, yaw + Math.toRadians(90), 0));
-    }
 
     @Override
     public boolean isAlive() {

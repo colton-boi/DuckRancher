@@ -1,4 +1,4 @@
-package me.colton.slimerancher.Data;
+package me.colton.slimerancher.data;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;

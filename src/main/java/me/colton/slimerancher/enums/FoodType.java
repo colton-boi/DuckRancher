@@ -1,4 +1,4 @@
-package me.colton.slimerancher.Enums;
+package me.colton.slimerancher.enums;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

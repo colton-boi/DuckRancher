@@ -1,4 +1,4 @@
-package me.colton.slimerancher.Entities.Creatures;
+package me.colton.slimerancher.entities.creatures;
 
 
 import org.bukkit.Location;

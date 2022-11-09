@@ -1,8 +1,7 @@
-package me.colton.slimerancher.Enums;
+package me.colton.slimerancher.enums;
 
-import me.colton.slimerancher.Entities.Creatures.Creature;
-import me.colton.slimerancher.Entities.Creatures.Slime;
-import me.colton.slimerancher.Entities.Creatures.Slimes.*;
+import me.colton.slimerancher.entities.creatures.Slime;
+import me.colton.slimerancher.entities.creatures.slimes.*;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

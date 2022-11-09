@@ -1,6 +1,6 @@
-package me.colton.slimerancher.Entities.Creatures.Slimes;
+package me.colton.slimerancher.entities.creatures.slimes;
 
-import me.colton.slimerancher.Entities.Creatures.Slime;
+import me.colton.slimerancher.entities.creatures.Slime;
 import org.bukkit.entity.Player;
 
 public class BoomSlime extends Slime {
