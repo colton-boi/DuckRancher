@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.colton</groupId>
-    <artifactId>SlimeRancher</artifactId>
+    <artifactId>DuckRancher</artifactId>
     <version>0.0.1-beta</version>
 
     <properties>
@@ -15,15 +15,15 @@
 
     <repositories>
         <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
             <version>1.18.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -51,7 +51,7 @@
                     <execution>
                         <phase>package</phase>
                         <configuration>
-                            <finalName>SlimeRancher</finalName>
+                            <finalName>DuckRancher</finalName>
                             <outputDirectory>../../Testing/plugins</outputDirectory>
                         </configuration>
                         <goals>
@@ -60,7 +60,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <finalName>SlimeRancher</finalName>
+                    <finalName>DuckRancher</finalName>
                     <outputDirectory>../../Testing/plugins</outputDirectory>
                 </configuration>
             </plugin>
