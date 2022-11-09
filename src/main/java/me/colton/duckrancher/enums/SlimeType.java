@@ -17,20 +17,15 @@ public enum SlimeType implements Type {
     TABBY(3, TabbySlime.class),
     PHOSPHOR(4, PhosphorSlime.class),
     BOOM(5, BoomSlime.class),
-    /*CRYSTAL(6),
-    HUNTER(7),
-    HONEY(8),
-    PUDDLE(9),
-    COTTON(10),
-    FLUTTER(11),
-    BATTY(12),
-    ANGLER(13),
-    RINGTAIL(14),
-    FIRE(15),
-    LUCKY(16),
-    GOLD(17),
-    TARR(18),
-    GORDO(19)*/;
+    CRYSTAL(6, CrystalSlime.class),
+    HUNTER(7, HunterSlime.class),
+    HONEY(8, HoneySlime.class),
+    BATTY(9, BattySlime.class),
+    FIRE(10, FireSlime.class),
+    LUCKY(11, LuckySlime.class),
+    GOLD(12, GoldSlime.class),
+    TARR(13, TarSlime.class),
+    GORDO(14, GordoSlime.class);
 
     private final ItemStack headItem;
     private final Class<? extends Slime> slimeClass;

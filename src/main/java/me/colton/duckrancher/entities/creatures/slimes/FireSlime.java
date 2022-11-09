@@ -2,7 +2,7 @@ package me.colton.duckrancher.entities.creatures.slimes;
 
 import me.colton.duckrancher.entities.creatures.Slime;
 
-public class PinkSlime extends Slime {
+public class FireSlime extends Slime {
     @Override
     public void customTick() {
 

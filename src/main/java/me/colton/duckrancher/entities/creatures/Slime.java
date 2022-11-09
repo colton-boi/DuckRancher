@@ -51,6 +51,11 @@ public abstract class Slime implements Creature {
         }
 
         ticksAlive++;
+
+        if (ticksAlive % 600 == 0 && foodRemaining > 0) foodRemaining--; // every 30 seconds, remove 1 food
+
+        if (ticksAlive % 20 == 0 && foodRemaining == 0) customAnger(false); // make angry when not fed
+
         customTick();
 
     }
