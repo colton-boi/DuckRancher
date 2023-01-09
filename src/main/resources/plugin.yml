@@ -1,5 +1,5 @@
 name: DuckRancher
 version: 0.0.1-beta
-main: me.colton.slimerancher.SlimeRancher
+main: me.colton.duckrancher.SlimeRancher
 api-version: 1.18
 author: TheCodingGoose
