@@ -1,12 +1,23 @@
 package me.colton.duckrancher.items;
 
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.level.Level;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_18_R2.entity.CraftHumanEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static me.colton.duckrancher.SlimeRancher.instance;
 import static org.bukkit.Bukkit.getScheduler;
+import static org.bukkit.Bukkit.getWorlds;
 
 public class VacPack {
 
@@ -14,6 +25,14 @@ public class VacPack {
 
     public VacPack(Player player) {
         this.player = player;
+        vacPacks.put(player,this);
+        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+    }
+
+    private static final Map<Player,VacPack> vacPacks = new HashMap<>();
+
+    public static VacPack getHandlerForPlayer(Player player) {
+        return vacPacks.get(player);
     }
 
     private void useVacPack() {
@@ -48,13 +67,18 @@ public class VacPack {
 
         @Override
         public void run() {
-            if (!player.isOnline()) getScheduler().cancelTask(task);
-            if (!player.isBlocking()) return;
-
-            useVacPack();
-
+            if (!player.isOnline()){
+                getScheduler().cancelTask(task);
+                vacPacks.remove(player);
+            }
+            if(player.isBlocking()){
+                useVacPack();
+            }
         }
 
     }, 0L, 1L);
 
+    public void onRightClickSlime() {
+        useVacPack();
+    }
 }
