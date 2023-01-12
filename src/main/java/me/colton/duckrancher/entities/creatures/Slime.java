@@ -1,9 +1,12 @@
 package me.colton.duckrancher.entities.creatures;
 
 import me.colton.duckrancher.enums.SlimeType;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.Random;
@@ -17,6 +20,7 @@ public abstract class Slime implements Creature {
     private SlimeType secondaryType;
     private UUID owner;
     private ArmorStand entity;
+    private boolean wasOnGround = true;
     public final Random random = new Random();
     public long lastAnger = System.currentTimeMillis();
     public long foodRemaining = 20;
@@ -50,6 +54,11 @@ public abstract class Slime implements Creature {
             }
         }
 
+        if(!wasOnGround && entity.isOnGround()){
+            playLandingSound();
+            playLandingParticles();
+        }
+
         ticksAlive++;
 
         if (ticksAlive % 600 == 0 && foodRemaining > 0) foodRemaining--; // every 30 seconds, remove 1 food
@@ -57,8 +66,26 @@ public abstract class Slime implements Creature {
         if (ticksAlive % 20 == 0 && foodRemaining == 0) customAnger(false); // make angry when not fed
 
         customTick();
-
+        wasOnGround = entity.isOnGround();
     }
+
+    protected void playLandingSound() {
+        Player player = entity.getServer().getPlayer(getOwner());
+        if(player == null) return;
+        player.playSound(entity.getLocation(),Sound.ENTITY_SLIME_SQUISH,2,getModifiedPitch());
+    }
+
+    private void playJumpingSound() {
+        Player player = entity.getServer().getPlayer(getOwner());
+        if(player == null) return;
+        player.playSound(entity.getLocation(),Sound.ENTITY_SLIME_JUMP,2, getModifiedPitch());
+    }
+
+    private float getModifiedPitch() {
+        return (float) (1 + random.nextDouble(-0.2d, 0.1d));
+    }
+
+    protected abstract void playLandingParticles();
 
     /**
      * Run custom stuff
@@ -68,7 +95,7 @@ public abstract class Slime implements Creature {
     /**
      * Spawn custom particles per player
      */
-    public abstract void customParticle();
+    public abstract void playJumpingParticles();
 
     /**
      *
@@ -82,8 +109,10 @@ public abstract class Slime implements Creature {
         Vector velocity = entity.getVelocity().add(new Vector((random.nextDouble()-0.5), (random.nextDouble()*0.5)+0.5, (random.nextDouble()-0.5)));
         entity.teleport(getLocation().setDirection(velocity));
         entity.setVelocity(velocity);
-        customParticle();
+        playJumpingParticles();
+        playJumpingSound();
     }
+
 
 
     @Override

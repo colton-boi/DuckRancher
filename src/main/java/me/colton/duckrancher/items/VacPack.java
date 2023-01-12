@@ -1,11 +1,16 @@
 package me.colton.duckrancher.items;
 
+import com.destroystokyo.paper.ParticleBuilder;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
+import me.colton.duckrancher.util.MathUtil;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.level.Level;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftHumanEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -22,6 +27,7 @@ import static org.bukkit.Bukkit.getWorlds;
 public class VacPack {
 
     private final Player player;
+    private int animationFrame = 0;
 
     public VacPack(Player player) {
         this.player = player;
@@ -61,6 +67,43 @@ public class VacPack {
             e.setVelocity(e.getVelocity().add(toEntity.multiply(-0.05)));
 
         }
+        playVacEffect();
+        playVacEffect();
+        playVacEffect();
+        playVacEffect();
+    }
+
+    private void playVacEffect() {
+        animationFrame +=1;
+        animationFrame %=40;
+        //if(animationFrame % 2 == 0) return;
+        //Vector direction = player.getEyeLocation().getDirection();
+        float f = (float) (Math.PI*2f/6.2f);
+        float x= (float) Math.sin(animationFrame*f);
+        float y= (float) Math.cos(animationFrame*f);
+        Quaternion quaternion = Quaternion.fromXYZ(x/2.5f,y/2.5f,0);
+        Quaternion playerRotation = Quaternion.fromYXZ(-(float) Math.toRadians(player.getEyeLocation().getYaw()), (float) Math.toRadians(player.getEyeLocation().getPitch()),0);
+        Location location = MathUtil.lerp(player.getEyeLocation(),
+            player.getEyeLocation().add(
+                MathUtil.applyQuaternion(
+                    MathUtil.applyQuaternion(new Vector(0, 0, 1), quaternion).multiply(3).add(new Vector(1,-0.5,0.5)),
+                    playerRotation
+                )
+            ),
+            animationFrame / 45d);
+        player.spawnParticle(
+            (animationFrame%2==0)?Particle.FIREWORKS_SPARK:Particle.CRIT,
+            location,
+            1,0,0,0,0
+        );
+//        quaternion.mul(Quaternion.fromYXZ(-0.1f,0,0));
+//        player.spawnParticle(
+//            Particle.ASH,
+//            MathUtil.lerp(player.getEyeLocation(),
+//                player.getEyeLocation().add(player.getEyeLocation().getDirection().multiply(5).rotateAroundY(-0.1)),
+//                animationFrame/20d),
+//            2
+//        );
     }
 
     int task = getScheduler().scheduleSyncRepeatingTask(instance, new Runnable() {
