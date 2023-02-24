@@ -4,12 +4,17 @@ import me.colton.duckrancher.entities.creatures.Slime;
 
 public class HoneySlime extends Slime {
     @Override
+    protected void playLandingParticles() {
+
+    }
+
+    @Override
     public void customTick() {
 
     }
 
     @Override
-    public void customParticle() {
+    public void playJumpingParticles() {
 
     }
 

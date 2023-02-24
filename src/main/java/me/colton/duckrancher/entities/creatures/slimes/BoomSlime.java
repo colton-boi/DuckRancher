@@ -5,6 +5,11 @@ import org.bukkit.entity.Player;
 
 public class BoomSlime extends Slime {
     @Override
+    protected void playLandingParticles() {
+
+    }
+
+    @Override
     public void customTick() {
         if (getEntity().getNearbyEntities(2.5, 2.5, 2.5).stream().anyMatch(e -> e instanceof Player)) {
             if (random.nextDouble() > 0.99) {
@@ -14,7 +19,7 @@ public class BoomSlime extends Slime {
     }
 
     @Override
-    public void customParticle() {
+    public void playJumpingParticles() {
 
     }
 
